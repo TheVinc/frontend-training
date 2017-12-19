@@ -4,32 +4,32 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: './src/index.jsx',
   },
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/static'
+    publicPath: '/assets',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
     }),
-    new CleanWebpackPlugin(['dist'])
+    new CleanWebpackPlugin(['dist']),
   ],
   module: {
     rules: [
       {
-        test: /.*\.js$/,
-        include: path.resolve(__dirname, "src"),
-        loader: 'babel-loader'
-      }
-    ]
+        test: /.*\.js(x{0,1})$/,
+        include: path.resolve(__dirname, 'src'),
+        loader: 'babel-loader',
+      },
+    ],
   },
   resolve: {
     alias: {
       components: path.resolve(__dirname, 'src/components'),
-      scenes: path.resolve(__dirname, 'src/scenes')
-    }
-  }
+      scenes: path.resolve(__dirname, 'src/scenes'),
+    },
+  },
 };

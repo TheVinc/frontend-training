@@ -9,13 +9,13 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
+        NODE_ENV: JSON.stringify('production'),
+      },
     }),
     new UglifyJSPlugin({
-      sourceMap: true
+      sourceMap: true,
     }),
-    new ExtractTextPlugin('styles-[hash:10].css')
+    new ExtractTextPlugin('styles-[hash:10].css'),
   ],
   module: {
     rules: [
@@ -26,12 +26,11 @@ module.exports = merge(common, {
           fallback: 'style-loader',
           use: [
             'css-loader',
-            'sass-loader'
-          ]
-        })
-      }
-    ]
-  }
+            'sass-loader',
+          ],
+        }),
+      },
+    ],
+  },
 });
-
 

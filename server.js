@@ -1,52 +1,50 @@
-'use strict';
-
 const Hapi = require('hapi');
 const Good = require('good');
+const Inert = require('inert');
 const Path = require('path');
 
-module.exports = function() {
-
+module.exports = function startServer() {
   const server = new Hapi.Server({
     connections: {
       routes: {
         files: {
-          relativeTo: Path.join(__dirname, 'dist')
-        }
-      }
-    }
+          relativeTo: Path.join(__dirname, 'dist'),
+        },
+      },
+    },
   });
 
   server.connection({
     host: 'localhost',
-    port: 8080
+    port: 8080,
   });
 
-  server.register(require('inert'), (err) => {
+  server.register(Inert, (err) => {
     if (err) {
       throw err;
     }
     server.route({
       method: 'GET',
       path: '/',
-      handler: function (request, reply) {
-        reply.file('./index.html')
-      }
+      handler: (request, reply) => {
+        reply.file('./index.html');
+      },
     });
     server.route({
       method: 'GET',
-      path: '/static/{param*}',
+      path: '/assets/{param*}',
       handler: {
         directory: {
-          path: Path.join(__dirname, 'dist')
-        }
-      }
+          path: Path.join(__dirname, 'dist'),
+        },
+      },
     });
     server.route({
       method: '*',
       path: '/{p*}',
-      handler: function (request, reply) {
-        reply.file('./index.html')
-      }
+      handler: (request, reply) => {
+        reply.file('./index.html');
+      },
     });
   });
 
@@ -56,26 +54,26 @@ module.exports = function() {
       reporters: {
         console: [{
           module: 'good-squeeze',
-            name: 'Squeeze',
-            args: [{
-              response: '*',
-              log: '*'
-            }]
-          }, {
-            module: 'good-console'
-        }, 'stdout']
-      }
-    }
+          name: 'Squeeze',
+          args: [{
+            response: '*',
+            log: '*',
+          }],
+        }, {
+          module: 'good-console',
+        }, 'stdout'],
+      },
+    },
   }], (err) => {
     if (err) {
       throw err; // something bad happened loading the plugin
     }
 
-    server.start((err) => {
-      if (err) {
-          throw err;
+    server.start((startErr) => {
+      if (startErr) {
+        throw startErr;
       }
-      server.log('info', 'Server running at: ' + server.info.uri);
+      server.log('info', `Server running at: ${server.info.uri}`);
     });
   });
 };

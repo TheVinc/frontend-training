@@ -6,20 +6,22 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    host: "0.0.0.0",
+    contentBase: path.join(__dirname, 'dist'),
+    host: '0.0.0.0',
     port: 8080,
-    historyApiFallback: true
+    historyApiFallback: {
+      index: '/assets',
+    },
   },
   watchOptions: {
-    aggregateTimeout: 1000
+    aggregateTimeout: 1000,
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('development')
-      }
-    })
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
   ],
   module: {
     rules: [
@@ -29,9 +31,9 @@ module.exports = merge(common, {
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader'
-        ]
-      }
-    ]
-  }
+          'sass-loader',
+        ],
+      },
+    ],
+  },
 });
