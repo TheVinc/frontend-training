@@ -1,0 +1,14 @@
+
+.splitpane {
+  display: inline-block;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.splitpane--left {
+  float: left;
+}
+
+.splitpane--right {
+  float: right;
+}

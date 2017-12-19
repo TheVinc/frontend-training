@@ -1,0 +1,64 @@
+// https://css-tricks.com/examples/HSLaExplorer/
+
+.container {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 100px 200px 100px;
+
+  grid-template-areas:
+    "head head2 . side"
+    "main main2 . side"
+    "footer footer footer footer";
+}
+
+
+@keyframes pulse {
+  0% {
+    background-color: red;
+  }
+  100% {
+    background-color: green;
+  }
+}
+
+.item-1 {
+  grid-area: head;
+  background: HSLA(162, 76%, 32%, 1.00);
+  animation: pulse 5s infinite;
+}
+
+.item-1-2 {
+  grid-area: head2;
+  background: HSLA(162, 76%, 32%, 1.00);
+}
+
+.item-2 {
+  grid-area: main;
+  background: HSLA(162, 76%, 32%, 0.7);
+}
+
+.item-2-2 {
+  grid-area: main2;
+  background: HSLA(162, 76%, 32%, 0.7);
+}
+
+.item-3 {
+  grid-area: side;
+  background: HSLA(162, 76%, 32%, 0.4);
+}
+
+.item-4 {
+  grid-area: footer;
+  background: #0A3442;
+}
+
+.item {
+  border-radius: 3px;
+  margin: 2px;
+  color: white;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
