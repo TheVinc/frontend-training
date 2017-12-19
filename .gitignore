@@ -1,0 +1,10 @@
+# Text editor files
+**/.DS_Store
+
+# Npm files
+node_modules
+npm-debug.log*
+package-lock.json
+
+# Codes files
+dist
