@@ -16,10 +16,10 @@ function personToString(person) {
 
 // ECMAScript 3 compatible
 const DotSyntax = () => {
-  const persons = getNewPersons().map(person => {
+  const persons = getNewPersons().map((person) => {
     person.someKey = 'Hello World dot';
     return person;
-  })
+  });
 
   return (
     <div>
@@ -31,14 +31,14 @@ const DotSyntax = () => {
       }
     </div>
   );
-}
+};
 
 // ECMAScript 3 compatible
 const SquareBracket = () => {
-  const persons = getNewPersons().map(person => {
+  const persons = getNewPersons().map((person) => {
     person['someKey'] = 'Hello World bracket';
     return person;
-  })
+  });
 
   return (
     <div>
@@ -50,7 +50,7 @@ const SquareBracket = () => {
       }
     </div>
   );
-}
+};
 
 // ECMAScript 5 compatible
 const DefineProperty = () => {
@@ -64,12 +64,12 @@ const DefineProperty = () => {
     Object.defineProperty(obj, key, config);
   };
 
-  const persons = getNewPersons().map(person => {
+  const persons = getNewPersons().map((person) => {
     defineProp(person, 'car', 'Dolorean');
     defineProp(person, 'dateOfBirth', 1981);
     defineProp(person, 'hasBeard', false);
-    console.log('DefineProperty person:', person)
-    console.log('DefineProperty Object.keys(person)', Object.keys(person))
+    console.log('DefineProperty person:', person);
+    console.log('DefineProperty Object.keys(person)', Object.keys(person));
     return person;
   });
 
@@ -90,36 +90,36 @@ const DefineProperties = () => {
   const person = Object.defineProperties({}, {
     someKey: {
       value: '(DefineProperties) someKey',
-      writable: true
+      writable: true,
     },
     anotherKey: {
       value: '(DefineProperties) anotherKey',
       writable: false,
-      enumerable: true
+      enumerable: true,
     },
     propKey3: {
       value: '(DefineProperties) propKey3',
       writable: true,
       enumerable: true,
-      configurable: false
+      configurable: false,
     },
     propKey4: {
       value: '(DefineProperties) propKey4',
       writable: true,
       enumerable: true,
-      configurable: true
-    }
-  })
+      configurable: true,
+    },
+  });
   person.someKey = 'new someKey';
   try {
     person.anotherKey = 'new anotherKey';
   } catch (err) {
-    console.error('writable false err', err)
+    console.error('writable false err', err);
   }
   try {
     delete person.propKey3;
   } catch (err) {
-    console.error('configurable false err', err)
+    console.error('configurable false err', err);
   }
   delete person.propKey4;
   persons.push(person);
@@ -127,13 +127,13 @@ const DefineProperties = () => {
     <div>
       <h4>4. Object.defineProperties</h4>
       {
-        persons.map((person, index) => (
-          <div key={`defineProperties-${index}`}>{personToString(person)}</div>
+        persons.map((p, index) => (
+          <div key={`defineProperties-${index}`}>{personToString(p)}</div>
         ))
       }
     </div>
   );
-}
+};
 
 const ConstructorWithPrototype = () => {
   // DONT DO
@@ -165,22 +165,20 @@ const ConstructorWithPrototype = () => {
     <div>
       <h4>5. ConstructorWithPrototype</h4>
       {civic.toString()}
-      <br/>
+      <br />
       {mondeo.toString()}
     </div>
   );
-}
+};
 
-const ConstructorPattern = () => {
-  return (
-    <div>
-      <DotSyntax/>
-      <SquareBracket/>
-      <DefineProperty/>
-      <DefineProperties/>
-      <ConstructorWithPrototype/>
-    </div>
-  );
-}
+const ConstructorPattern = () => (
+  <div>
+    <DotSyntax />
+    <SquareBracket />
+    <DefineProperty />
+    <DefineProperties />
+    <ConstructorWithPrototype />
+  </div>
+);
 
 export default ConstructorPattern;

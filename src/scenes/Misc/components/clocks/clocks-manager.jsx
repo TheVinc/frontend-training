@@ -61,7 +61,7 @@ export default class ClocksManager extends React.PureComponent {
             </select>
           </label>
         </form>
-        {clocksList}
+        <ul>{clocksList}</ul>
       </div>
     );
   }
