@@ -92,6 +92,25 @@ const Scoping5 = function() {
   return '';
 }
 
+const Scoping6 = function() {
+  console.log('SCOPING6 ----');
+  var length = 10;
+  function fn() {
+    console.log(this.length);
+  }
+
+  var obj = {
+    length: 5,
+    method: function(fn) {
+      fn();
+      console.log('arguments', arguments)
+      arguments[0]();
+    }
+  };
+
+  console.log('obj.method(fn, 1)', obj.method(fn, 1));
+}
+
 const Component = () => (
   <div>
     <Scoping/>
@@ -99,6 +118,7 @@ const Component = () => (
     <Scoping3/>
     <Scoping4/>
     <Scoping5/>
+    {/* <Scoping6/> */}
   </div>
 )
 

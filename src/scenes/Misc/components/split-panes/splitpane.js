@@ -3,7 +3,7 @@ import React from 'react';
 export function Splitpane(props) {
   return (
     <div className="splitpane">
-      <div className="splitpane--left">
+      <div style={{ float: 'left' }}>
         {props.left}
       </div>
       <div className="splitpane--right">
